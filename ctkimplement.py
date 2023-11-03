@@ -73,8 +73,10 @@ class App(customtkinter.CTk):
     def terminate_all(self):
         # Kill all open/active processes
         for proc in psutil.process_iter():
-            proc.kill()
-
+            try:
+                proc.kill()
+            except Exception as e:
+                print(f"FAILED TO KILL PROCESS: {e}")
         # Open a single exe using subprocess
         #subprocess.Popen("C:\\path\\to\\exe.exe")
 
