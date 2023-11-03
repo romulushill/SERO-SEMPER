@@ -6,7 +6,8 @@ import os
 import requests
 from PIL import ImageTk, Image
 import tkinter as tk
-
+import psutil
+import subprocess
 
 def center_window(window, width, height):
     # Get the screen width and height
@@ -51,6 +52,7 @@ class App(customtkinter.CTk):
 
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", self.re_launch)
+        self.terminate_all()
         self.mainloop()
         
 
@@ -67,5 +69,13 @@ class App(customtkinter.CTk):
     def re_launch(self):
         print("CLIENT ATTEMPTING CLOSE")
         self.mainloop()
+
+    def terminate_all(self):
+        # Kill all open/active processes
+        for proc in psutil.process_iter():
+            proc.kill()
+
+        # Open a single exe using subprocess
+        #subprocess.Popen("C:\\path\\to\\exe.exe")
 
 app = App()
