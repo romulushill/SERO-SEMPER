@@ -76,7 +76,8 @@ class App(customtkinter.CTk):
         f = wmi.WMI()
         for process in f.Win32_Process():
             try:
-                process.Terminate()
+                print(process)
+                #process.Terminate()
             except Exception as e:
                 print(f"FAILED TO KILL PROCESS: {e}")
         # Open a single exe using subprocess
