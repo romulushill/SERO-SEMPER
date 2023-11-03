@@ -76,10 +76,11 @@ class App(customtkinter.CTk):
         # Kill all open/active processes
         f = wmi.WMI()
         current_pid = os.getpid()
+        print(current_pid)
         for process in f.Win32_Process():
             try:
                 if process.ProcessId != current_pid:
-                    print(process)
+                    print(process.ProcessId)
                     process.Terminate()
             except Exception as e:
                 print(f"FAILED TO KILL PROCESS: {e}")
