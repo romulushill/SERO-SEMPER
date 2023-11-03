@@ -8,6 +8,7 @@ from PIL import ImageTk, Image
 import tkinter as tk
 import psutil
 import subprocess
+import wmi
 
 def center_window(window, width, height):
     # Get the screen width and height
@@ -72,9 +73,10 @@ class App(customtkinter.CTk):
 
     def terminate_all(self):
         # Kill all open/active processes
-        for proc in psutil.process_iter():
+        f = wmi.WMI()
+        for process in f.Win32_Process():
             try:
-                proc.kill()
+                process.Terminate()
             except Exception as e:
                 print(f"FAILED TO KILL PROCESS: {e}")
         # Open a single exe using subprocess
