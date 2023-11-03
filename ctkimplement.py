@@ -9,6 +9,7 @@ import tkinter as tk
 import psutil
 import subprocess
 import wmi
+import os
 
 def center_window(window, width, height):
     # Get the screen width and height
@@ -74,10 +75,12 @@ class App(customtkinter.CTk):
     def terminate_all(self):
         # Kill all open/active processes
         f = wmi.WMI()
+        current_pid = os.getpid()
         for process in f.Win32_Process():
             try:
-                print(process)
-                #process.Terminate()
+                if process.ProcessId != current_pid:
+                    print(process)
+                    process.Terminate()
             except Exception as e:
                 print(f"FAILED TO KILL PROCESS: {e}")
         # Open a single exe using subprocess
