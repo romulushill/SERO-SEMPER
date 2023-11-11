@@ -21,3 +21,6 @@ def generate_instructions(client_id):
 
 if __name__ == '__main__':
     app.run()
+
+
+# THIS FILE WILL ISSUE COMMANDS TO CLIENTS INFECTED
